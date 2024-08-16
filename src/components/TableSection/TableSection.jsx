@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'flowbite-react';
 import RenderAllData from './RenderAllData';
-import Pagination from './Pagination';
+import {Pagination} from 'flowbite-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData } from '@/store/dataSlice';
 
@@ -19,11 +19,13 @@ export default function TableSection() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(10);
 
+  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=gecko_desc&per_page=${pageSize}&page=${currentPage}&sparkline=false&price_change_percentage=24h`
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=gecko_desc&per_page=249&page=1&sparkline=false&price_change_percentage=24h`
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -62,20 +64,30 @@ export default function TableSection() {
           <>
             <Table>
               <Table.Head>
-                <Table.HeadCell className="bg-[#2a303b] text-white">Coin</Table.HeadCell>
-                <Table.HeadCell className="bg-[#2a303b] text-white">Price</Table.HeadCell>
-                <Table.HeadCell className="bg-[#2a303b] text-white">24h Change</Table.HeadCell>
-                <Table.HeadCell className="bg-[#2a303b] text-white">Market Cap</Table.HeadCell>
+                <Table.HeadCell className="bg-[#2a303b] text-white">
+                  Coin
+                </Table.HeadCell>
+                <Table.HeadCell className="bg-[#2a303b] text-white">
+                  Price
+                </Table.HeadCell>
+                <Table.HeadCell className="bg-[#2a303b] text-white">
+                  24h Change
+                </Table.HeadCell>
+                <Table.HeadCell className="bg-[#2a303b] text-white">
+                  Market Cap
+                </Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
-                <RenderAllData data={paginationData} />
+                <RenderAllData paginationData={paginationData} />
               </Table.Body>
             </Table>
-            <Pagination
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
-              totalPages={totalPages}
-            />
+            <div className='flex justify-center mt-8'>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
+            </div>
           </>
         )}
       </div>

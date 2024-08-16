@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { addWatchList, removeWatchList, openDrawer } from "@/store/dataSlice";
 import Image from "next/image";
-import { Pagination } from "flowbite-react";
-
 
 export default function TableRowItem({ id, data }) {
   const router = useRouter();
@@ -83,9 +81,7 @@ export default function TableRowItem({ id, data }) {
 
       
     </Table.Row>
-    {/* <div className="flex overflow-x-auto sm:justify-center">
-      <Pagination currentPage={currentPage} totalPages={25} onPageChange={onPageChange} />
-    </div> */}
+   
     </>
   );
   

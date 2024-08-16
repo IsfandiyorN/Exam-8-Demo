@@ -1,36 +1,35 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import React from "react";
 
-export default function About({ countryData }) {
+const CryptoDetails = ({ countryData }) => {
   return (
     <div className="text-white">
       <h2 className="text-3xl font-semibold capitalize mb-6">
-        {countryData?.name.official}
+        {countryData.name}
       </h2>
       <div>
         <Image
-          src={countryData?.flags.svg}
-          width={300}
-          height={300}
-          alt={countryData?.name.official}
+          src={cryptoData.image.large}
+          width={100}
+          height={100}
+          alt={countryData.name}
         />
         <p className="text-2xl mt-8">
-          Pul birligi:{" "}
-          {
-            countryData?.currencies[Object.keys(countryData?.currencies)[0]]
-              .name
-          }
+          Symbol: {countryData.symbol.toUpperCase()}
         </p>
-
         <p className="text-2xl mt-6">
-          {String(countryData?.population).replace(
-            /\B(?=(\d{3})+(?!\d))/g,
-            ","
-          )}
-          <span> people</span>
+          Current Price: ${countryData.market_data.current_price.usd}
+        </p>
+        <p className="text-2xl mt-6">
+          Market Cap: ${countryData.market_data.market_cap.usd}
+        </p>
+        <p className="text-2xl mt-6">
+          Total Supply: {countryData.market_data.total_supply || "N/A"}
         </p>
       </div>
     </div>
   );
-}
+};
+
+export default CryptoDetails;
